@@ -4,14 +4,12 @@ import { Play, ChevronDown } from 'lucide-react';
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background video */}
+      {/* Background image */}
       <div className="absolute inset-0">
-        <iframe
-          src="https://player.vimeo.com/video/787498544?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
-          className="absolute w-[177.78vh] min-w-full min-h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          allow="autoplay; fullscreen"
-          style={{ border: 'none' }}
-          title="Background"
+        <img
+          src="/gifs/abc.gif"
+          alt=""
+          className="absolute w-full h-full object-cover opacity-70"
         />
       </div>
 

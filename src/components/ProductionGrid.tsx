@@ -70,26 +70,26 @@ function ProductionCard({
       className="card-gradient-border group cursor-pointer"
       onClick={() => production.videoUrl && onPlay(production)}
     >
-      {/* Video thumbnail area */}
+      {/* Thumbnail area */}
       <div className="relative aspect-video bg-gradient-to-br from-primary-900 to-primary-800 overflow-hidden">
-        {production.videoUrl ? (
+        {production.gifUrl ? (
           <>
-            <iframe
-              src={`${production.videoUrl}?background=1&autoplay=0&loop=0&byline=0&title=0&muted=1`}
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              allow="autoplay"
-              title={production.title}
-              style={{ border: 'none' }}
+            <img
+              src={production.gifUrl}
+              alt={production.title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-primary-950/40 group-hover:bg-primary-950/20 transition-all duration-300" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                className="w-14 h-14 rounded-full bg-accent-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                whileHover={{ scale: 1.1 }}
-              >
-                <Play size={22} className="text-white ml-1" fill="white" />
-              </motion.div>
-            </div>
+            <div className="absolute inset-0 bg-primary-950/30 group-hover:bg-primary-950/10 transition-all duration-300" />
+            {production.videoUrl && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div
+                  className="w-14 h-14 rounded-full bg-accent-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  whileHover={{ scale: 1.1 }}
+                >
+                  <Play size={22} className="text-white ml-1" fill="white" />
+                </motion.div>
+              </div>
+            )}
           </>
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">

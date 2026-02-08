@@ -5,6 +5,7 @@ export interface Production {
   description: string;
   category: string;
   videoUrl?: string;
+  gifUrl?: string;
   thumbnailText?: string;
 }
 
@@ -17,6 +18,7 @@ export const productions: Production[] = [
       'Justin breaks down how he used a virtual production workflow to create A Second Home, an immersive educational series hosted by an astrophysicist imagining life on exoplanets.',
     category: 'Virtual Production',
     videoUrl: 'https://player.vimeo.com/video/787498544',
+    gifUrl: '/gifs/abc.gif',
     thumbnailText: 'Virtual Production',
   },
   {
@@ -27,6 +29,7 @@ export const productions: Production[] = [
       'A proof of concept for a series produced by Al Roker Entertainment about the Metaverse and its implications, hosted and co-produced by Justin "Mr. Fascinate" Shaifer.',
     category: 'Series',
     videoUrl: 'https://player.vimeo.com/video/787497906',
+    gifUrl: '/gifs/metaverse.gif',
     thumbnailText: 'Series',
   },
   {
@@ -47,6 +50,7 @@ export const productions: Production[] = [
       'Justin partners with ATTN and travels across MGM resorts in Las Vegas, discussing how each experience heightens and reduces specific neurotransmitters.',
     category: 'Branded Content',
     videoUrl: 'https://player.vimeo.com/video/787494350',
+    gifUrl: '/gifs/mgm-attn.gif',
     thumbnailText: 'Branded',
   },
   {
@@ -77,6 +81,7 @@ export const productions: Production[] = [
       'Justin works with MythBusters star Kari Byron and Jenny Buccos to host a show about the past, present, and future of plastics, sponsored by PureCycle and produced in conjunction with Intuitive Content.',
     category: 'Series',
     videoUrl: 'https://player.vimeo.com/video/787496645',
+    gifUrl: '/gifs/purecycle.gif',
     thumbnailText: 'Series',
   },
   {
