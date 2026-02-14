@@ -1,5 +1,3 @@
-const GH_RAW = 'https://raw.githubusercontent.com/MrFascinate/Productions/claude/redesign-productions-page-2J4R1';
-
 export interface Production {
   id: string;
   title: string;
@@ -8,7 +6,6 @@ export interface Production {
   category: string;
   videoUrl?: string;
   gifUrl?: string;
-  thumbnailText?: string;
 }
 
 export const productions: Production[] = [
@@ -20,8 +17,7 @@ export const productions: Production[] = [
       'Justin breaks down how he used a virtual production workflow to create A Second Home, an immersive educational series hosted by an astrophysicist imagining life on exoplanets.',
     category: 'Virtual Production',
     videoUrl: 'https://player.vimeo.com/video/787498544',
-    gifUrl: `${GH_RAW}/ABC.gif`,
-    thumbnailText: 'Virtual Production',
+    gifUrl: '/gifs/abc.gif',
   },
   {
     id: 'metaverse',
@@ -31,8 +27,7 @@ export const productions: Production[] = [
       'A proof of concept for a series produced by Al Roker Entertainment about the Metaverse and its implications, hosted and co-produced by Justin "Mr. Fascinate" Shaifer.',
     category: 'Series',
     videoUrl: 'https://player.vimeo.com/video/787497906',
-    gifUrl: `${GH_RAW}/on_the_verge_poc_final_0729.mp4%2B(Original).gif`,
-    thumbnailText: 'Series',
+    gifUrl: '/gifs/metaverse.gif',
   },
   {
     id: 'linkedin-learning',
@@ -42,7 +37,6 @@ export const productions: Production[] = [
       'Justin works with LinkedIn Learning to engage in a dynamic conversation with an AI about the Future of Work.',
     category: 'Education',
     videoUrl: 'https://player.vimeo.com/video/787493637',
-    thumbnailText: 'Education',
   },
   {
     id: 'attn-mgm',
@@ -52,8 +46,7 @@ export const productions: Production[] = [
       'Justin partners with ATTN and travels across MGM resorts in Las Vegas, discussing how each experience heightens and reduces specific neurotransmitters.',
     category: 'Branded Content',
     videoUrl: 'https://player.vimeo.com/video/787494350',
-    gifUrl: `${GH_RAW}/MGM%20ATTN.gif`,
-    thumbnailText: 'Branded',
+    gifUrl: '/gifs/mgm-attn.gif',
   },
   {
     id: 'wedu-pbs',
@@ -63,17 +56,15 @@ export const productions: Production[] = [
       'Justin works with WEDU PBS in Tampa, FL to discuss innovations for local climate impact reduction. This was filmed immediately before Hurricane Ian made landfall nearby.',
     category: 'Broadcast',
     videoUrl: 'https://player.vimeo.com/video/787495541',
-    thumbnailText: 'Broadcast',
   },
   {
     id: 'chevy-ev',
-    title: "Chevy EV Commercial",
+    title: 'Chevy EV Commercial',
     partner: 'Chevrolet',
     description:
       'Justin hosts a car commercial for Chevy\'s EV, describing "What\'s Cool About Electric" and how sustainable energy sources can empower communities of color.',
     category: 'Commercial',
     videoUrl: 'https://player.vimeo.com/video/787496100',
-    thumbnailText: 'Commercial',
   },
   {
     id: 'purecycle',
@@ -83,8 +74,7 @@ export const productions: Production[] = [
       'Justin works with MythBusters star Kari Byron and Jenny Buccos to host a show about the past, present, and future of plastics, sponsored by PureCycle and produced in conjunction with Intuitive Content.',
     category: 'Series',
     videoUrl: 'https://player.vimeo.com/video/787496645',
-    gifUrl: `${GH_RAW}/Purecycle.gif`,
-    thumbnailText: 'Series',
+    gifUrl: '/gifs/purecycle.gif',
   },
   {
     id: 'al-roker-space',
@@ -94,7 +84,6 @@ export const productions: Production[] = [
       'Justin works with Al Roker Entertainment to host an episode of a dynamic show where he explores the possibility of human-led expeditions to the moon and Mars.',
     category: 'Series',
     videoUrl: 'https://player.vimeo.com/video/787497321',
-    thumbnailText: 'Series',
   },
   {
     id: 'usa-science-fest',
@@ -103,7 +92,6 @@ export const productions: Production[] = [
     description:
       'Justin served as official host and MC for 5 large-scale USA Science Fest Events, engaging thousands of attendees with interactive STEM demonstrations and interviews.',
     category: 'Live Events',
-    thumbnailText: 'Live',
   },
 ];
 

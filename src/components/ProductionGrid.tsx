@@ -1,7 +1,5 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Play, X } from 'lucide-react';
 import { productions, categories, type Production } from '../data/productionsData';
 
@@ -70,42 +68,40 @@ function ProductionCard({
       className="card-gradient-border group cursor-pointer"
       onClick={() => production.videoUrl && onPlay(production)}
     >
-      {/* Thumbnail area */}
+      {/* Thumbnail — GIF or styled placeholder, NO Vimeo iframes */}
       <div className="relative aspect-video bg-gradient-to-br from-primary-900 to-primary-800 overflow-hidden">
         {production.gifUrl ? (
-          <>
-            <img
-              src={production.gifUrl}
-              alt={production.title}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-primary-950/30 group-hover:bg-primary-950/10 transition-all duration-300" />
-            {production.videoUrl && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <motion.div
-                  className="w-14 h-14 rounded-full bg-accent-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <Play size={22} className="text-white ml-1" fill="white" />
-                </motion.div>
-              </div>
-            )}
-          </>
+          <img
+            src={production.gifUrl}
+            alt={production.title}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
         ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-800 via-primary-900 to-accent-500/20 flex items-center justify-center">
+            <span className="text-2xl font-display font-bold text-white/20 uppercase tracking-wider text-center px-4">
+              {production.title}
+            </span>
+          </div>
+        )}
+
+        {/* Dark overlay that lifts on hover */}
+        <div className="absolute inset-0 bg-primary-950/30 group-hover:bg-primary-950/10 transition-all duration-300" />
+
+        {/* Play button on hover */}
+        {production.videoUrl && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full glass flex items-center justify-center mx-auto mb-3">
-                <Play size={24} className="text-accent-400" />
-              </div>
-              <p className="text-xs text-gray-400 uppercase tracking-wider">
-                {production.thumbnailText}
-              </p>
-            </div>
+            <motion.div
+              className="w-14 h-14 rounded-full bg-accent-500/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              whileHover={{ scale: 1.1 }}
+            >
+              <Play size={22} className="text-white ml-1" fill="white" />
+            </motion.div>
           </div>
         )}
 
         {/* Category badge */}
-        <div className="absolute top-3 left-3">
+        <div className="absolute top-3 left-3 z-10">
           <span className="glass rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-accent-400">
             {production.category}
           </span>
@@ -114,11 +110,9 @@ function ProductionCard({
 
       {/* Card content */}
       <div className="p-5">
-        <div className="flex items-start justify-between gap-3 mb-2">
-          <h3 className="text-lg font-display font-bold text-white group-hover:text-gradient transition-all duration-300">
-            {production.title}
-          </h3>
-        </div>
+        <h3 className="text-lg font-display font-bold text-white group-hover:text-gradient transition-all duration-300 mb-1">
+          {production.title}
+        </h3>
         <p className="text-xs font-semibold uppercase tracking-wider text-accent-400 mb-3">
           {production.partner}
         </p>
@@ -211,7 +205,7 @@ export default function ProductionGrid() {
         )}
       </div>
 
-      {/* Video modal */}
+      {/* Video modal — only place Vimeo is used, on click */}
       <AnimatePresence>
         {activeVideo && activeVideo.videoUrl && (
           <VideoModal

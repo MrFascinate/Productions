@@ -7,7 +7,7 @@ export default function Hero() {
       {/* Background image */}
       <div className="absolute inset-0">
         <img
-          src="https://raw.githubusercontent.com/MrFascinate/Productions/claude/redesign-productions-page-2J4R1/ABC.gif"
+          src="/gifs/abc.gif"
           alt=""
           className="absolute w-full h-full object-cover opacity-70"
         />
