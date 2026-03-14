@@ -80,6 +80,7 @@ const productions: Production[] = [
     description: 'Justin breaks down how he used a virtual production workflow to create A Second Home, an immersive educational series hosted by an astrophysicist imagining life on exoplanets.',
     category: 'Virtual Production',
     videoUrl: 'https://player.vimeo.com/video/787498544',
+    gifUrl: '/gifs/ASecondHome2.gif',
   },
   {
     id: 'metaverse',
@@ -97,7 +98,7 @@ const productions: Production[] = [
     description: 'Justin works with LinkedIn Learning to engage in a dynamic conversation with an AI about the Future of Work.',
     category: 'Education',
     videoUrl: 'https://player.vimeo.com/video/787493637',
-    gifUrl: '/gifs/abc.gif',
+    gifUrl: '/gifs/LinkedIn Learning.gif',
   },
   {
     id: 'attn-mgm',
