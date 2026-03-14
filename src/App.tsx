@@ -2,6 +2,63 @@ import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { Play, X, ChevronDown, Mail, ExternalLink, Award, Tv, Users, Clapperboard, Menu } from 'lucide-react'
 
+/* ─── Periodic Table Logo ─── */
+
+function MrFascinateLogo({ height = 32, className = '' }: { height?: number; className?: string }) {
+  // Aspect ratio from the design: roughly 7.5:1
+  const w = height * 7.5
+  const boxH = height * 0.72
+  const boxW = boxH * 0.82
+  const gap = boxH * 0.06
+  const mrFontSize = height * 0.7
+  const elemFontSize = boxH * 0.48
+  const numFontSize = boxH * 0.22
+  const blue = '#2585E8'
+
+  const elements = [
+    { sym: 'F', num: '9' },
+    { sym: 'As', num: '33' },
+    { sym: 'C', num: '6' },
+    { sym: 'I', num: '53' },
+    { sym: 'Na', num: '11' },
+    { sym: 'Te', num: '52' },
+  ]
+
+  const startX = height * 1.85
+  const totalBoxesW = elements.length * boxW + (elements.length - 1) * gap
+
+  return (
+    <svg viewBox={`0 0 ${w} ${height}`} height={height} className={className} aria-label="Mr. Fascinate">
+      {/* "Mr." text */}
+      <text x="0" y={height * 0.78} fill={blue} fontSize={mrFontSize} fontFamily="'Montserrat', sans-serif" fontStyle="italic" fontWeight="400">
+        Mr.
+      </text>
+      {/* Element boxes */}
+      {elements.map((el, i) => {
+        const x = startX + i * (boxW + gap)
+        const y = (height - boxH) / 2
+        return (
+          <g key={el.sym}>
+            <rect x={x} y={y} width={boxW} height={boxH} rx={2} fill={blue} />
+            {/* Atomic number */}
+            <text x={x + boxW - numFontSize * 0.35} y={y + numFontSize * 1.15} textAnchor="end"
+              fill="#11111C" fontSize={numFontSize} fontFamily="'Montserrat', sans-serif" fontWeight="600">
+              {el.num}
+            </text>
+            {/* Element symbol */}
+            <text x={x + boxW / 2} y={y + boxH * 0.72} textAnchor="middle"
+              fill="#11111C" fontSize={elemFontSize} fontFamily="'Montserrat', sans-serif" fontWeight="700">
+              {el.sym}
+            </text>
+          </g>
+        )
+      })}
+      {/* Sizing reference (hidden) */}
+      <rect x={startX} y={0} width={totalBoxesW} height={0} fill="none" />
+    </svg>
+  )
+}
+
 /* ─── Data ─── */
 
 interface Production {
@@ -102,8 +159,8 @@ function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 py-3">
       <div className="max-w-7xl mx-auto px-4">
         <div className="glass rounded-full flex items-center justify-between px-6 py-3">
-          <a href="#" className="text-lg font-bold text-white" style={{ fontFamily: 'Oswald' }}>
-            MR. <span className="text-gradient">FASCINATE</span>
+          <a href="#" className="flex items-center">
+            <MrFascinateLogo height={28} />
           </a>
           <div className="hidden md:flex items-center gap-8">
             {['Productions', 'About', 'Contact'].map(l => (
@@ -153,7 +210,7 @@ function Hero() {
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
           className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
           Award-winning media exploring AI, space, neuroscience, and the future
-          — produced and hosted by Justin <span className="text-gradient font-semibold">"Mr. Fascinate"</span> Shaifer.
+          — produced and hosted by Justin <span className="inline-flex align-middle mx-1"><MrFascinateLogo height={20} /></span> Shaifer.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}
           className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -381,7 +438,7 @@ function Footer() {
       <div className="section-divider mb-12" />
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8 mb-12">
         <div>
-          <h3 className="text-xl font-bold text-white mb-2" style={{ fontFamily: 'Oswald' }}>MR. <span className="text-gradient">FASCINATE</span></h3>
+          <div className="mb-2"><MrFascinateLogo height={24} /></div>
           <p className="text-sm text-gray-400">Award-winning STEM media producer and on-camera talent.</p>
         </div>
         <div>
