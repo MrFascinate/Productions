@@ -59,6 +59,52 @@ function MrFascinateLogo({ height = 32, className = '' }: { height?: number; cla
   )
 }
 
+/* ─── F8 Media Logo ─── */
+
+function F8MediaLogo({ height = 48, className = '' }: { height?: number; className?: string }) {
+  // Logo proportions: square box with "F" + superscript "8", "MEDIA" below
+  const boxSize = height * 0.7
+  const totalW = boxSize * 1.2
+  const totalH = height
+  const borderW = boxSize * 0.04
+  const blue = '#2585E8'
+  const cyan = '#04CCFF'
+  const fSize = boxSize * 0.55
+  const numSize = boxSize * 0.2
+  const mediaSize = boxSize * 0.18
+  const boxX = (totalW - boxSize) / 2
+  const boxY = 0
+  const mediaY = boxY + boxSize + mediaSize * 1.2
+
+  return (
+    <svg viewBox={`0 0 ${totalW} ${totalH}`} height={height} className={className} aria-label="F8 Media">
+      {/* Outer border */}
+      <rect x={boxX} y={boxY} width={boxSize} height={boxSize} rx={3}
+        fill="none" stroke={blue} strokeWidth={borderW} />
+      {/* Inner border */}
+      <rect x={boxX + borderW * 1.8} y={boxY + borderW * 1.8}
+        width={boxSize - borderW * 3.6} height={boxSize - borderW * 3.6} rx={2}
+        fill="none" stroke={blue} strokeWidth={borderW * 0.5} opacity={0.5} />
+      {/* F letter */}
+      <text x={boxX + boxSize * 0.38} y={boxY + boxSize * 0.72} textAnchor="middle"
+        fill={blue} fontSize={fSize} fontFamily="'Montserrat', sans-serif" fontWeight="700">
+        F
+      </text>
+      {/* 8 superscript */}
+      <text x={boxX + boxSize * 0.75} y={boxY + boxSize * 0.3} textAnchor="middle"
+        fill={cyan} fontSize={numSize} fontFamily="'Montserrat', sans-serif" fontWeight="600">
+        8
+      </text>
+      {/* MEDIA text */}
+      <text x={totalW / 2} y={mediaY} textAnchor="middle"
+        fill={blue} fontSize={mediaSize} fontFamily="'Montserrat', sans-serif" fontWeight="600"
+        letterSpacing={mediaSize * 0.35}>
+        MEDIA
+      </text>
+    </svg>
+  )
+}
+
 /* ─── Data ─── */
 
 interface Production {
@@ -219,10 +265,10 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/70 to-dark" />
 
       <div className="relative z-10 text-center pt-32 pb-20 px-4 max-w-4xl mx-auto">
-        <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-          className="inline-block glass rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest text-cyan mb-6">
-          Fascinate Media
-        </motion.span>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          className="mb-6">
+          <F8MediaLogo height={80} className="mx-auto" />
+        </motion.div>
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
           className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white leading-none mb-6" style={{ fontFamily: 'Oswald' }}>
           PRODUCTIONS
