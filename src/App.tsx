@@ -59,52 +59,6 @@ function MrFascinateLogo({ height = 32, className = '' }: { height?: number; cla
   )
 }
 
-/* ─── F8 Media Logo ─── */
-
-function F8MediaLogo({ height = 48, className = '' }: { height?: number; className?: string }) {
-  // Logo proportions: square box with "F" + superscript "8", "MEDIA" below
-  const boxSize = height * 0.7
-  const totalW = boxSize * 1.2
-  const totalH = height
-  const borderW = boxSize * 0.04
-  const blue = '#2585E8'
-  const cyan = '#04CCFF'
-  const fSize = boxSize * 0.55
-  const numSize = boxSize * 0.2
-  const mediaSize = boxSize * 0.18
-  const boxX = (totalW - boxSize) / 2
-  const boxY = 0
-  const mediaY = boxY + boxSize + mediaSize * 1.2
-
-  return (
-    <svg viewBox={`0 0 ${totalW} ${totalH}`} height={height} className={className} aria-label="F8 Media">
-      {/* Outer border */}
-      <rect x={boxX} y={boxY} width={boxSize} height={boxSize} rx={3}
-        fill="none" stroke={blue} strokeWidth={borderW} />
-      {/* Inner border */}
-      <rect x={boxX + borderW * 1.8} y={boxY + borderW * 1.8}
-        width={boxSize - borderW * 3.6} height={boxSize - borderW * 3.6} rx={2}
-        fill="none" stroke={blue} strokeWidth={borderW * 0.5} opacity={0.5} />
-      {/* F letter */}
-      <text x={boxX + boxSize * 0.38} y={boxY + boxSize * 0.72} textAnchor="middle"
-        fill={blue} fontSize={fSize} fontFamily="'Montserrat', sans-serif" fontWeight="700">
-        F
-      </text>
-      {/* 8 superscript */}
-      <text x={boxX + boxSize * 0.75} y={boxY + boxSize * 0.3} textAnchor="middle"
-        fill={cyan} fontSize={numSize} fontFamily="'Montserrat', sans-serif" fontWeight="600">
-        8
-      </text>
-      {/* MEDIA text */}
-      <text x={totalW / 2} y={mediaY} textAnchor="middle"
-        fill={blue} fontSize={mediaSize} fontFamily="'Montserrat', sans-serif" fontWeight="600"
-        letterSpacing={mediaSize * 0.35}>
-        MEDIA
-      </text>
-    </svg>
-  )
-}
-
 /* ─── Data ─── */
 
 interface Production {
@@ -339,43 +293,65 @@ function Navbar() {
 /* ─── Hero ─── */
 
 function Hero() {
+  const [showReel, setShowReel] = useState(false)
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0">
-        <img src="/gifs/abc.gif" alt="" className="w-full h-full object-cover" />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/70 to-dark" />
+    <>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img src="/gifs/abc.gif" alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/70 to-dark" />
 
-      <div className="relative z-10 text-center pt-32 pb-20 px-4 max-w-4xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-          className="mb-6">
-          <F8MediaLogo height={80} className="mx-auto" />
-        </motion.div>
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
-          className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white leading-none mb-6" style={{ fontFamily: 'Oswald' }}>
-          PRODUCTIONS
-        </motion.h1>
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
-          className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
-          Award-winning media exploring AI, space, neuroscience, and the future
-          — produced and hosted by Justin <span className="inline-flex align-middle mx-1"><MrFascinateLogo height={20} /></span> Shaifer.
-        </motion.p>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#productions" className="inline-flex items-center justify-center gap-2 bg-blue text-white font-semibold text-sm uppercase tracking-wider rounded-full px-8 py-4 hover:-translate-y-0.5 transition shadow-lg shadow-blue/30">
-            <Play size={16} /> Watch Reel
-          </a>
-          <a href="#about" className="inline-flex items-center justify-center gap-2 border border-blue/40 text-white font-semibold text-sm uppercase tracking-wider rounded-full px-8 py-4 hover:bg-blue/10 transition">
-            Learn More
-          </a>
-        </motion.div>
-      </div>
+        <div className="relative z-10 text-center pt-32 pb-20 px-4 max-w-4xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+            className="mb-6">
+            <img src="/gifs/f8 media.png" alt="F8 Media" className="h-20 sm:h-24 mx-auto object-contain" />
+          </motion.div>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
+            className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white leading-none mb-6" style={{ fontFamily: 'Oswald' }}>
+            PRODUCTIONS
+          </motion.h1>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
+            className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
+            Award-winning media exploring AI, space, neuroscience, and the future
+            — produced and hosted by Justin <span className="inline-flex align-middle mx-1"><MrFascinateLogo height={20} /></span> Shaifer.
+          </motion.p>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button onClick={() => setShowReel(true)} className="inline-flex items-center justify-center gap-2 bg-blue text-white font-semibold text-sm uppercase tracking-wider rounded-full px-8 py-4 hover:-translate-y-0.5 transition shadow-lg shadow-blue/30">
+              <Play size={16} /> Watch Reel
+            </button>
+            <a href="#about" className="inline-flex items-center justify-center gap-2 border border-blue/40 text-white font-semibold text-sm uppercase tracking-wider rounded-full px-8 py-4 hover:bg-blue/10 transition">
+              Learn More
+            </a>
+          </motion.div>
+        </div>
 
-      <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-        <a href="#productions" className="text-gray-400 hover:text-white transition"><ChevronDown size={28} /></a>
-      </motion.div>
-    </section>
+        <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+          <a href="#productions" className="text-gray-400 hover:text-white transition"><ChevronDown size={28} /></a>
+        </motion.div>
+      </section>
+
+      <AnimatePresence>
+        {showReel && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur flex items-center justify-center"
+            onClick={() => setShowReel(false)}>
+            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
+              className="relative w-full max-w-5xl mx-4" onClick={e => e.stopPropagation()}>
+              <button onClick={() => setShowReel(false)} className="absolute -top-12 right-0 text-white/70 hover:text-white"><X size={28} /></button>
+              <p className="text-white font-bold text-xl mb-3" style={{ fontFamily: 'Oswald' }}>PRODUCTION REEL</p>
+              <div className="relative pb-[56.25%] rounded-xl overflow-hidden bg-dark-card">
+                <iframe src="https://player.vimeo.com/video/810371279?autoplay=1&title=0&byline=0&portrait=0"
+                  allow="autoplay; fullscreen; picture-in-picture" title="Production Reel"
+                  className="absolute inset-0 w-full h-full border-0" />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
