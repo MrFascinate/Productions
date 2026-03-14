@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { Play, X, ChevronDown, Mail, ExternalLink, Award, Tv, Users, Clapperboard, Menu } from 'lucide-react'
+import { Play, X, ChevronDown, ChevronLeft, ChevronRight, Mail, ExternalLink, Award, Tv, Users, Clapperboard, Menu } from 'lucide-react'
 
 /* ─── Periodic Table Logo ─── */
 
@@ -115,6 +115,7 @@ interface Production {
   category: string
   videoUrl?: string
   gifUrl?: string
+  thumbnailUrl?: string
 }
 
 const productions: Production[] = [
@@ -193,29 +194,110 @@ const productions: Production[] = [
     description: 'Justin served as official host and MC for 5 large-scale USA Science Fest Events, engaging thousands of attendees with interactive STEM demonstrations.',
     category: 'Live Events',
   },
+  {
+    id: 'ai-cool-things',
+    title: '3 Cool Things You Can Do with AI Today',
+    partner: 'Fascinate Media',
+    description: 'Justin shares three practical and exciting things you can do with AI right now.',
+    category: 'AI Video',
+    videoUrl: 'https://player.vimeo.com/video/1075550647',
+    thumbnailUrl: 'https://vumbnail.com/1075550647.jpg',
+  },
+  {
+    id: 'ai-assistants',
+    title: 'AI Assistants and How They Can Help',
+    partner: 'Fascinate Media',
+    description: 'A breakdown of how AI assistants work and the ways they can boost your productivity.',
+    category: 'AI Video',
+    videoUrl: 'https://player.vimeo.com/video/1097189159',
+    thumbnailUrl: 'https://vumbnail.com/1097189159.jpg',
+  },
+  {
+    id: 'ai-agents',
+    title: 'What Are AI Agents?',
+    partner: 'Fascinate Media',
+    description: 'Justin explains what AI agents are and why they matter for the future of work.',
+    category: 'AI Video',
+    videoUrl: 'https://player.vimeo.com/video/1074161713',
+    thumbnailUrl: 'https://vumbnail.com/1074161713.jpg',
+  },
+  {
+    id: 'ai-headshots',
+    title: 'Are AI Headshots Good Enough Today?',
+    partner: 'Fascinate Media',
+    description: 'Testing whether AI-generated headshots are ready to replace professional photography.',
+    category: 'AI Video',
+    videoUrl: 'https://player.vimeo.com/video/1154892061',
+    thumbnailUrl: 'https://vumbnail.com/1154892061.jpg',
+  },
+  {
+    id: 'ai-social-clips',
+    title: 'AI Can Edit Your Social Media Clips',
+    partner: 'Fascinate Media',
+    description: 'How AI tools can automatically edit and optimize your social media video content.',
+    category: 'AI Video',
+    videoUrl: 'https://player.vimeo.com/video/1154892200',
+    thumbnailUrl: 'https://vumbnail.com/1154892200.jpg',
+  },
+  {
+    id: 'ai-agents-replacing',
+    title: 'AI Agents Replacing Assistants',
+    partner: 'Fascinate Media',
+    description: 'Exploring how AI agents are evolving beyond simple assistants into autonomous workers.',
+    category: 'AI Video',
+    videoUrl: 'https://player.vimeo.com/video/1154892514',
+    thumbnailUrl: 'https://vumbnail.com/1154892514.jpg',
+  },
+  {
+    id: 'ai-jobs-future',
+    title: 'AI Enabled Jobs of the Future',
+    partner: 'Fascinate Media',
+    description: 'A look at the new careers and roles that AI is creating across industries.',
+    category: 'AI Video',
+    videoUrl: 'https://player.vimeo.com/video/1154892579',
+    thumbnailUrl: 'https://vumbnail.com/1154892579.jpg',
+  },
+  {
+    id: 'ai-context-eng',
+    title: 'What Is Context Engineering?',
+    partner: 'Fascinate Media',
+    description: 'Justin breaks down the emerging discipline of context engineering for AI systems.',
+    category: 'AI Video',
+    videoUrl: 'https://player.vimeo.com/video/1154892831',
+    thumbnailUrl: 'https://vumbnail.com/1154892831.jpg',
+  },
+  {
+    id: 'ai-background',
+    title: 'Replacing Any Background with AI',
+    partner: 'Fascinate Media',
+    description: 'How to use AI to seamlessly replace backgrounds in photos and videos.',
+    category: 'AI Video',
+    videoUrl: 'https://player.vimeo.com/video/1154892954',
+    thumbnailUrl: 'https://vumbnail.com/1154892954.jpg',
+  },
+  {
+    id: 'ai-face-upload',
+    title: 'Watch This Before Uploading Your Face with AI Tools',
+    partner: 'Fascinate Media',
+    description: 'Important privacy and safety considerations before using AI face tools.',
+    category: 'AI Video',
+    videoUrl: 'https://player.vimeo.com/video/1154893086',
+    thumbnailUrl: 'https://vumbnail.com/1154893086.jpg',
+  },
+  {
+    id: 'ai-prompt-importance',
+    title: "How Does AI Know What's Most Important in Your Prompt?",
+    partner: 'Fascinate Media',
+    description: 'Understanding how AI models parse and prioritize different parts of your prompts.',
+    category: 'AI Video',
+    videoUrl: 'https://player.vimeo.com/video/1154893202',
+    thumbnailUrl: 'https://vumbnail.com/1154893202.jpg',
+  },
 ]
 
-const categories = ['All', 'Virtual Production', 'Series', 'Education', 'Branded Content', 'Broadcast', 'Commercial', 'Live Events']
+const categories = ['All', 'Virtual Production', 'Series', 'Education', 'Branded Content', 'Broadcast', 'Commercial', 'Live Events', 'AI Video']
 
-interface AIVideo {
-  id: string
-  title: string
-  vimeoId: string
-}
-
-const aiVideos: AIVideo[] = [
-  { id: 'ai-cool-things', title: '3 Cool Things You Can Do with AI Today', vimeoId: '1075550647' },
-  { id: 'ai-assistants', title: 'AI Assistants and How They Can Help', vimeoId: '1097189159' },
-  { id: 'ai-agents', title: 'What Are AI Agents?', vimeoId: '1074161713' },
-  { id: 'ai-headshots', title: 'Are AI Headshots Good Enough Today?', vimeoId: '1154892061' },
-  { id: 'ai-social-clips', title: 'AI Can Edit Your Social Media Clips', vimeoId: '1154892200' },
-  { id: 'ai-agents-replacing', title: 'AI Agents Replacing Assistants', vimeoId: '1154892514' },
-  { id: 'ai-jobs-future', title: 'AI Enabled Jobs of the Future', vimeoId: '1154892579' },
-  { id: 'ai-context-eng', title: 'What Is Context Engineering?', vimeoId: '1154892831' },
-  { id: 'ai-background', title: 'Replacing Any Background with AI', vimeoId: '1154892954' },
-  { id: 'ai-face-upload', title: 'Watch This Before Uploading Your Face with AI Tools', vimeoId: '1154893086' },
-  { id: 'ai-prompt-importance', title: "How Does AI Know What's Most Important in Your Prompt?", vimeoId: '1154893202' },
-]
+const ITEMS_PER_PAGE = 9
 
 /* ─── Navbar ─── */
 
@@ -229,8 +311,8 @@ function Navbar() {
             <MrFascinateLogo height={28} />
           </a>
           <div className="hidden md:flex items-center gap-8">
-            {['Productions', 'AI Videos', 'About', 'Contact'].map(l => (
-              <a key={l} href={`#${l.toLowerCase().replace(' ', '-')}`} className="text-sm font-medium text-gray-300 hover:text-white transition uppercase tracking-wider">{l}</a>
+            {['Productions', 'About', 'Contact'].map(l => (
+              <a key={l} href={`#${l.toLowerCase()}`} className="text-sm font-medium text-gray-300 hover:text-white transition uppercase tracking-wider">{l}</a>
             ))}
             <a href="https://www.justinshaifer.com" target="_blank" rel="noopener noreferrer"
               className="text-xs font-semibold uppercase tracking-wider text-white border border-blue/40 rounded-full px-5 py-2 hover:bg-blue/10 transition">
@@ -243,8 +325,8 @@ function Navbar() {
         </div>
         {open && (
           <div className="md:hidden glass rounded-2xl mt-2 p-5 flex flex-col gap-3">
-            {['Productions', 'AI Videos', 'About', 'Contact'].map(l => (
-              <a key={l} href={`#${l.toLowerCase().replace(' ', '-')}`} onClick={() => setOpen(false)}
+            {['Productions', 'About', 'Contact'].map(l => (
+              <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)}
                 className="text-sm text-gray-300 hover:text-white uppercase tracking-wider">{l}</a>
             ))}
           </div>
@@ -335,8 +417,8 @@ function ProductionCard({ p, i, onPlay }: { p: Production; i: number; onPlay: (p
 
       {/* Thumbnail */}
       <div className="relative aspect-video overflow-hidden bg-dark">
-        {p.gifUrl ? (
-          <img src={p.gifUrl} alt={p.title} loading="lazy"
+        {(p.gifUrl || p.thumbnailUrl) ? (
+          <img src={p.gifUrl || p.thumbnailUrl} alt={p.title} loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-dark-card via-dark to-blue/10">
@@ -371,11 +453,25 @@ function ProductionCard({ p, i, onPlay }: { p: Production; i: number; onPlay: (p
 
 function Productions() {
   const [cat, setCat] = useState('All')
+  const [page, setPage] = useState(0)
   const [video, setVideo] = useState<Production | null>(null)
   const ref = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   const filtered = cat === 'All' ? productions : productions.filter(p => p.category === cat)
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE)
+  const paged = filtered.slice(page * ITEMS_PER_PAGE, (page + 1) * ITEMS_PER_PAGE)
+
+  const goToPage = (p: number) => {
+    setPage(p)
+    gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const handleCategoryChange = (c: string) => {
+    setCat(c)
+    setPage(0)
+  }
 
   return (
     <section id="productions" className="relative py-24 bg-dark">
@@ -386,107 +482,55 @@ function Productions() {
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Oswald' }}>
             THE <span className="text-gradient">PRODUCTIONS</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">From virtual production workflows and immersive educational series to nationally broadcast STEM content and branded campaigns.</p>
+          <p className="text-gray-400 max-w-2xl mx-auto">From virtual production workflows and immersive educational series to AI explainers, STEM content, and branded campaigns.</p>
         </motion.div>
 
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {categories.map(c => (
-            <button key={c} onClick={() => setCat(c)}
+            <button key={c} onClick={() => handleCategoryChange(c)}
               className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all ${
                 cat === c ? 'bg-blue text-white shadow-lg shadow-blue/30' : 'glass text-gray-400 hover:text-white'
               }`}>{c}</button>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((p, i) => <ProductionCard key={p.id} p={p} i={i} onPlay={setVideo} />)}
+        <div ref={gridRef} className="scroll-mt-28">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${cat}-${page}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {paged.map((p, i) => <ProductionCard key={p.id} p={p} i={i} onPlay={setVideo} />)}
+            </motion.div>
+          </AnimatePresence>
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-3 mt-12">
+            <button onClick={() => goToPage(page - 1)} disabled={page === 0}
+              className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white transition disabled:opacity-30 disabled:cursor-not-allowed">
+              <ChevronLeft size={18} />
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button key={i} onClick={() => goToPage(i)}
+                className={`w-10 h-10 rounded-full text-sm font-semibold transition-all ${
+                  page === i ? 'bg-blue text-white shadow-lg shadow-blue/30' : 'glass text-gray-400 hover:text-white'
+                }`}>{i + 1}</button>
+            ))}
+            <button onClick={() => goToPage(page + 1)} disabled={page === totalPages - 1}
+              className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white transition disabled:opacity-30 disabled:cursor-not-allowed">
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        )}
       </div>
 
       <AnimatePresence>
         {video?.videoUrl && <VideoModal production={video} onClose={() => setVideo(null)} />}
-      </AnimatePresence>
-    </section>
-  )
-}
-
-/* ─── AI Videos Section ─── */
-
-function AIVideoCard({ v, i, onPlay }: { v: AIVideo; i: number; onPlay: (v: AIVideo) => void }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-
-  return (
-    <motion.div ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: i * 0.06 }}
-      className="card cursor-pointer group"
-      onClick={() => onPlay(v)}>
-      <div className="relative aspect-video overflow-hidden bg-dark">
-        <img src={`https://vumbnail.com/${v.vimeoId}.jpg`} alt={v.title} loading="lazy"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div className="absolute inset-0 bg-dark/20 group-hover:bg-transparent transition-colors duration-300" />
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="w-14 h-14 rounded-full bg-blue/90 flex items-center justify-center">
-            <Play size={22} className="text-white ml-0.5" fill="white" />
-          </div>
-        </div>
-        <span className="absolute top-3 left-3 glass rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-cyan">
-          AI Video
-        </span>
-      </div>
-      <div className="p-5">
-        <h3 className="text-lg font-bold text-white mb-1" style={{ fontFamily: 'Oswald' }}>{v.title}</h3>
-      </div>
-    </motion.div>
-  )
-}
-
-function AIVideoModal({ video, onClose }: { video: AIVideo; onClose: () => void }) {
-  return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] bg-black/90 backdrop-blur flex items-center justify-center"
-      onClick={onClose}>
-      <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
-        className="relative w-full max-w-5xl mx-4" onClick={e => e.stopPropagation()}>
-        <button onClick={onClose} className="absolute -top-12 right-0 text-white/70 hover:text-white"><X size={28} /></button>
-        <p className="text-white font-bold text-xl mb-3" style={{ fontFamily: 'Oswald' }}>{video.title}</p>
-        <div className="relative pb-[56.25%] rounded-xl overflow-hidden bg-dark-card">
-          <iframe src={`https://player.vimeo.com/video/${video.vimeoId}?autoplay=1&color=2585E8&title=0&byline=0&portrait=0`}
-            allow="autoplay; fullscreen; picture-in-picture" title={video.title}
-            className="absolute inset-0 w-full h-full border-0" />
-        </div>
-      </motion.div>
-    </motion.div>
-  )
-}
-
-function AIVideos() {
-  const [activeVideo, setActiveVideo] = useState<AIVideo | null>(null)
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  return (
-    <section id="ai-videos" className="relative py-24 bg-dark-card">
-      <div className="section-divider" />
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan/5 rounded-full blur-3xl" />
-      <div className="max-w-7xl mx-auto px-4 relative pt-12">
-        <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} className="text-center mb-12">
-          <span className="inline-block glass rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-cyan mb-4">AI Video Gallery</span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Oswald' }}>
-            AI <span className="text-gradient">VIDEOS</span>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">Watch Justin break down AI concepts, share practical tips, and inspire audiences around the world.</p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {aiVideos.map((v, i) => <AIVideoCard key={v.id} v={v} i={i} onPlay={setActiveVideo} />)}
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {activeVideo && <AIVideoModal video={activeVideo} onClose={() => setActiveVideo(null)} />}
       </AnimatePresence>
     </section>
   )
@@ -623,7 +667,6 @@ export default function App() {
       <Navbar />
       <Hero />
       <Productions />
-      <AIVideos />
       <About />
       <Contact />
       <Footer />
