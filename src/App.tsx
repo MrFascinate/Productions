@@ -30,7 +30,7 @@ function MrFascinateLogo({ height = 32, className = '' }: { height?: number; cla
   return (
     <svg viewBox={`0 0 ${w} ${height}`} height={height} className={className} aria-label="Mr. Fascinate">
       {/* "Mr." text */}
-      <text x="0" y={height * 0.78} fill={blue} fontSize={mrFontSize} fontFamily="'Montserrat', sans-serif" fontStyle="italic" fontWeight="400">
+      <text x="0" y={height * 0.78} fill={blue} fontSize={mrFontSize} fontFamily="'Montserrat', sans-serif" fontWeight="400">
         Mr.
       </text>
       {/* Element boxes */}
@@ -151,6 +151,26 @@ const productions: Production[] = [
 
 const categories = ['All', 'Virtual Production', 'Series', 'Education', 'Branded Content', 'Broadcast', 'Commercial', 'Live Events']
 
+interface AIVideo {
+  id: string
+  title: string
+  vimeoId: string
+}
+
+const aiVideos: AIVideo[] = [
+  { id: 'ai-cool-things', title: '3 Cool Things You Can Do with AI Today', vimeoId: '1075550647' },
+  { id: 'ai-assistants', title: 'AI Assistants and How They Can Help', vimeoId: '1097189159' },
+  { id: 'ai-agents', title: 'What Are AI Agents?', vimeoId: '1074161713' },
+  { id: 'ai-headshots', title: 'Are AI Headshots Good Enough Today?', vimeoId: '1154892061' },
+  { id: 'ai-social-clips', title: 'AI Can Edit Your Social Media Clips', vimeoId: '1154892200' },
+  { id: 'ai-agents-replacing', title: 'AI Agents Replacing Assistants', vimeoId: '1154892514' },
+  { id: 'ai-jobs-future', title: 'AI Enabled Jobs of the Future', vimeoId: '1154892579' },
+  { id: 'ai-context-eng', title: 'What Is Context Engineering?', vimeoId: '1154892831' },
+  { id: 'ai-background', title: 'Replacing Any Background with AI', vimeoId: '1154892954' },
+  { id: 'ai-face-upload', title: 'Watch This Before Uploading Your Face with AI Tools', vimeoId: '1154893086' },
+  { id: 'ai-prompt-importance', title: "How Does AI Know What's Most Important in Your Prompt?", vimeoId: '1154893202' },
+]
+
 /* ─── Navbar ─── */
 
 function Navbar() {
@@ -163,8 +183,8 @@ function Navbar() {
             <MrFascinateLogo height={28} />
           </a>
           <div className="hidden md:flex items-center gap-8">
-            {['Productions', 'About', 'Contact'].map(l => (
-              <a key={l} href={`#${l.toLowerCase()}`} className="text-sm font-medium text-gray-300 hover:text-white transition uppercase tracking-wider">{l}</a>
+            {['Productions', 'AI Videos', 'About', 'Contact'].map(l => (
+              <a key={l} href={`#${l.toLowerCase().replace(' ', '-')}`} className="text-sm font-medium text-gray-300 hover:text-white transition uppercase tracking-wider">{l}</a>
             ))}
             <a href="https://www.justinshaifer.com" target="_blank" rel="noopener noreferrer"
               className="text-xs font-semibold uppercase tracking-wider text-white border border-blue/40 rounded-full px-5 py-2 hover:bg-blue/10 transition">
@@ -177,8 +197,8 @@ function Navbar() {
         </div>
         {open && (
           <div className="md:hidden glass rounded-2xl mt-2 p-5 flex flex-col gap-3">
-            {['Productions', 'About', 'Contact'].map(l => (
-              <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)}
+            {['Productions', 'AI Videos', 'About', 'Contact'].map(l => (
+              <a key={l} href={`#${l.toLowerCase().replace(' ', '-')}`} onClick={() => setOpen(false)}
                 className="text-sm text-gray-300 hover:text-white uppercase tracking-wider">{l}</a>
             ))}
           </div>
@@ -344,6 +364,88 @@ function Productions() {
   )
 }
 
+/* ─── AI Videos Section ─── */
+
+function AIVideoCard({ v, i, onPlay }: { v: AIVideo; i: number; onPlay: (v: AIVideo) => void }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  return (
+    <motion.div ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: i * 0.06 }}
+      className="card cursor-pointer group"
+      onClick={() => onPlay(v)}>
+      <div className="relative aspect-video overflow-hidden bg-dark">
+        <img src={`https://vumbnail.com/${v.vimeoId}.jpg`} alt={v.title} loading="lazy"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div className="absolute inset-0 bg-dark/20 group-hover:bg-transparent transition-colors duration-300" />
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="w-14 h-14 rounded-full bg-blue/90 flex items-center justify-center">
+            <Play size={22} className="text-white ml-0.5" fill="white" />
+          </div>
+        </div>
+        <span className="absolute top-3 left-3 glass rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-cyan">
+          AI Video
+        </span>
+      </div>
+      <div className="p-5">
+        <h3 className="text-lg font-bold text-white mb-1" style={{ fontFamily: 'Oswald' }}>{v.title}</h3>
+      </div>
+    </motion.div>
+  )
+}
+
+function AIVideoModal({ video, onClose }: { video: AIVideo; onClose: () => void }) {
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] bg-black/90 backdrop-blur flex items-center justify-center"
+      onClick={onClose}>
+      <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
+        className="relative w-full max-w-5xl mx-4" onClick={e => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute -top-12 right-0 text-white/70 hover:text-white"><X size={28} /></button>
+        <p className="text-white font-bold text-xl mb-3" style={{ fontFamily: 'Oswald' }}>{video.title}</p>
+        <div className="relative pb-[56.25%] rounded-xl overflow-hidden bg-dark-card">
+          <iframe src={`https://player.vimeo.com/video/${video.vimeoId}?autoplay=1&color=2585E8&title=0&byline=0&portrait=0`}
+            allow="autoplay; fullscreen; picture-in-picture" title={video.title}
+            className="absolute inset-0 w-full h-full border-0" />
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+function AIVideos() {
+  const [activeVideo, setActiveVideo] = useState<AIVideo | null>(null)
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  return (
+    <section id="ai-videos" className="relative py-24 bg-dark-card">
+      <div className="section-divider" />
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan/5 rounded-full blur-3xl" />
+      <div className="max-w-7xl mx-auto px-4 relative pt-12">
+        <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} className="text-center mb-12">
+          <span className="inline-block glass rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-cyan mb-4">AI Video Gallery</span>
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Oswald' }}>
+            AI <span className="text-gradient">VIDEOS</span>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">Watch Justin break down AI concepts, share practical tips, and inspire audiences around the world.</p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {aiVideos.map((v, i) => <AIVideoCard key={v.id} v={v} i={i} onPlay={setActiveVideo} />)}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {activeVideo && <AIVideoModal video={activeVideo} onClose={() => setActiveVideo(null)} />}
+      </AnimatePresence>
+    </section>
+  )
+}
+
 /* ─── About ─── */
 
 const highlights = [
@@ -475,6 +577,7 @@ export default function App() {
       <Navbar />
       <Hero />
       <Productions />
+      <AIVideos />
       <About />
       <Contact />
       <Footer />
