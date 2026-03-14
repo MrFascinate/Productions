@@ -80,7 +80,6 @@ const productions: Production[] = [
     description: 'Justin breaks down how he used a virtual production workflow to create A Second Home, an immersive educational series hosted by an astrophysicist imagining life on exoplanets.',
     category: 'Virtual Production',
     videoUrl: 'https://player.vimeo.com/video/787498544',
-    gifUrl: '/gifs/abc.gif',
   },
   {
     id: 'metaverse',
@@ -98,6 +97,7 @@ const productions: Production[] = [
     description: 'Justin works with LinkedIn Learning to engage in a dynamic conversation with an AI about the Future of Work.',
     category: 'Education',
     videoUrl: 'https://player.vimeo.com/video/787493637',
+    gifUrl: '/gifs/abc.gif',
   },
   {
     id: 'attn-mgm',
@@ -135,7 +135,7 @@ const productions: Production[] = [
   },
   {
     id: 'al-roker-space',
-    title: 'Space Expeditions',
+    title: 'Forging the Future',
     partner: 'Al Roker Entertainment',
     description: 'Justin works with Al Roker Entertainment to host an episode of a dynamic show where he explores the possibility of human-led expeditions to the moon and Mars.',
     category: 'Series',
@@ -305,7 +305,7 @@ function Hero() {
         <div className="relative z-10 text-center pt-32 pb-20 px-4 max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="mb-6">
-            <img src="/gifs/f8 media.png" alt="F8 Media" className="h-20 sm:h-24 mx-auto object-contain" />
+            <img src="/gifs/f8 media.png" alt="F8 Media" className="h-80 sm:h-96 mx-auto object-contain" />
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
             className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white leading-none mb-6" style={{ fontFamily: 'Oswald' }}>
