@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { Play, X, ChevronDown, ChevronLeft, ChevronRight, Mail, ExternalLink, Menu } from 'lucide-react'
+import { Play, X, ChevronDown, Mail, ExternalLink, Menu } from 'lucide-react'
 
 /* ─── Data ─── */
 
@@ -95,6 +95,54 @@ const productions: Production[] = [
     description: 'Justin served as official host and MC for 5 large-scale USA Science Fest Events, engaging thousands of attendees with interactive STEM demonstrations.',
     category: 'Live Events',
     gifUrl: '/gifs/USA Science Fest.gif',
+  },
+  {
+    id: 'day-on-mars',
+    title: 'Day On Mars',
+    partner: 'Fascinate Media',
+    description: 'Day On Mars is a 3D-Animated short-form series produced in Unreal Engine that showcases how future residents might spend their day on Mars.',
+    category: 'Virtual Production',
+    gifUrl: '/gifs/DayOnMars4k_7_6_24_1(2).gif',
+  },
+  {
+    id: 'soul-of-a-nation',
+    title: 'Soul of a Nation - ABC',
+    partner: 'ABC News',
+    description: 'Justin weighs in on the importance of STEM with ABC News on Prime Time TV in their 6-part series Soul of a Nation. Justin\'s feature in episode 2 is now available on Hulu.',
+    category: 'Broadcast',
+    gifUrl: '/gifs/abc.gif',
+  },
+  {
+    id: 'why-am-i-like-this',
+    title: 'Why am I Like This? PBS Digital Studios',
+    partner: 'PBS Digital Studios',
+    description: 'Justin executive produced an 8 episode series about biology and anthropology starring Dr. Tina Lasisi. His cameo appearances can be found on YouTube!',
+    category: 'Series',
+    gifUrl: '/gifs/WHYA.gif',
+  },
+  {
+    id: 'intuit-ideas',
+    title: 'Intuit IDEAS',
+    partner: 'Fascinate Media',
+    description: 'A branded content series capturing the progress of business owners as they use Intuit\'s financial technology products such as TurboTax, Mailchimp, and more.',
+    category: 'Branded Content',
+    gifUrl: '/gifs/Intuit Teaser.gif',
+  },
+  {
+    id: 'nsf-icorps',
+    title: 'NSF iCorps',
+    partner: 'NSF / USC',
+    description: 'A series of educational explainer videos describing the impact of NSF\'s iCorps program at USC.',
+    category: 'Education',
+    gifUrl: '/gifs/NSF+ICorps.gif',
+  },
+  {
+    id: 'hood-science',
+    title: 'Hood Science',
+    partner: 'Fascinate Media',
+    description: 'An animated series that explains educational concepts like environmental justice and food deserts.',
+    category: 'Series',
+    gifUrl: '/gifs/HOOD SCIENCE.gif',
   },
   {
     id: 'ai-cool-things',
@@ -199,7 +247,6 @@ const productions: Production[] = [
 
 const categories = ['All', 'Virtual Production', 'Series', 'Education', 'Branded Content', 'Broadcast', 'Commercial', 'Live Events', 'AI Video']
 
-const ITEMS_PER_PAGE = 9
 
 /* ─── Navbar ─── */
 
@@ -376,25 +423,11 @@ function ProductionCard({ p, i, onPlay }: { p: Production; i: number; onPlay: (p
 
 function Productions() {
   const [cat, setCat] = useState('All')
-  const [page, setPage] = useState(0)
   const [video, setVideo] = useState<Production | null>(null)
   const ref = useRef<HTMLDivElement>(null)
-  const gridRef = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   const filtered = cat === 'All' ? productions : productions.filter(p => p.category === cat)
-  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE)
-  const paged = filtered.slice(page * ITEMS_PER_PAGE, (page + 1) * ITEMS_PER_PAGE)
-
-  const goToPage = (p: number) => {
-    setPage(p)
-    gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
-  const handleCategoryChange = (c: string) => {
-    setCat(c)
-    setPage(0)
-  }
 
   return (
     <section id="productions" className="relative py-24 bg-dark">
@@ -409,46 +442,24 @@ function Productions() {
 
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {categories.map(c => (
-            <button key={c} onClick={() => handleCategoryChange(c)}
+            <button key={c} onClick={() => setCat(c)}
               className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all ${
                 cat === c ? 'bg-blue text-white shadow-lg shadow-blue/30' : 'glass text-gray-400 hover:text-white'
               }`}>{c}</button>
           ))}
         </div>
 
-        <div ref={gridRef} className="scroll-mt-28">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`${cat}-${page}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {paged.map((p, i) => <ProductionCard key={p.id} p={p} i={i} onPlay={setVideo} />)}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-3 mt-12">
-            <button onClick={() => goToPage(page - 1)} disabled={page === 0}
-              className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white transition disabled:opacity-30 disabled:cursor-not-allowed">
-              <ChevronLeft size={18} />
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => (
-              <button key={i} onClick={() => goToPage(i)}
-                className={`w-10 h-10 rounded-full text-sm font-semibold transition-all ${
-                  page === i ? 'bg-blue text-white shadow-lg shadow-blue/30' : 'glass text-gray-400 hover:text-white'
-                }`}>{i + 1}</button>
-            ))}
-            <button onClick={() => goToPage(page + 1)} disabled={page === totalPages - 1}
-              className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white transition disabled:opacity-30 disabled:cursor-not-allowed">
-              <ChevronRight size={18} />
-            </button>
-          </div>
-        )}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={cat}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((p, i) => <ProductionCard key={p.id} p={p} i={i} onPlay={setVideo} />)}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       <AnimatePresence>
