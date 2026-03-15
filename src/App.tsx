@@ -31,7 +31,7 @@ const productions: Production[] = [
     title: 'Day On Mars',
     partner: 'Fascinate Media',
     description: 'Day On Mars is a 3D-Animated short-form series produced in Unreal Engine that showcases how future residents might spend their day on Mars.',
-    category: 'Virtual Production',
+    category: 'Series',
     gifUrl: '/gifs/DayOnMars4k_7_6_24_1(2).gif',
   },
   {
@@ -255,7 +255,7 @@ const productions: Production[] = [
   },
 ]
 
-const categories = ['All', 'Virtual Production', 'Series', 'Education', 'Branded Content', 'Broadcast', 'Commercial', 'Live Events', 'AI Video']
+const categories = ['All', 'Series', 'Education', 'Branded Content', 'Broadcast', 'Commercial', 'Live Events', 'AI Video']
 
 
 /* ─── Navbar ─── */
