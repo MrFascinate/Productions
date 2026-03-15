@@ -116,6 +116,7 @@ const productions: Production[] = [
     description: 'Justin works with WEDU PBS in Tampa, FL to discuss innovations for local climate impact reduction. This was filmed immediately before Hurricane Ian made landfall nearby.',
     category: 'Broadcast',
     videoUrl: 'https://player.vimeo.com/video/787495541',
+    gifUrl: '/gifs/WEDU.gif',
   },
   {
     id: 'chevy-ev',
@@ -124,6 +125,7 @@ const productions: Production[] = [
     description: 'Justin hosts a car commercial for Chevy\'s EV, describing "What\'s Cool About Electric" and how sustainable energy sources can empower communities of color.',
     category: 'Commercial',
     videoUrl: 'https://player.vimeo.com/video/787496100',
+    gifUrl: '/gifs/CHEVY DTU.gif',
   },
   {
     id: 'purecycle',
@@ -141,6 +143,7 @@ const productions: Production[] = [
     description: 'Justin works with Al Roker Entertainment to host an episode of a dynamic show where he explores the possibility of human-led expeditions to the moon and Mars.',
     category: 'Series',
     videoUrl: 'https://player.vimeo.com/video/787497321',
+    gifUrl: '/gifs/Forging the Future.gif',
   },
   {
     id: 'usa-science-fest',
@@ -148,6 +151,7 @@ const productions: Production[] = [
     partner: 'USA Science & Engineering Festival',
     description: 'Justin served as official host and MC for 5 large-scale USA Science Fest Events, engaging thousands of attendees with interactive STEM demonstrations.',
     category: 'Live Events',
+    gifUrl: '/gifs/USA Science Fest.gif',
   },
   {
     id: 'ai-cool-things',
