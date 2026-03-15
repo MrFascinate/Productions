@@ -39,7 +39,7 @@ const productions: Production[] = [
     title: "What's Cool About Electric",
     partner: 'Chevrolet',
     description: 'Justin hosts a car commercial for Chevy\'s EV, describing "What\'s Cool About Electric" and how sustainable energy sources can empower communities of color.',
-    category: 'Commercial',
+    category: 'Branded Content',
     videoUrl: 'https://player.vimeo.com/video/787496100',
     gifUrl: '/gifs/CHEVY DTU.gif',
   },
@@ -282,7 +282,7 @@ const productions: Production[] = [
   },
 ]
 
-const categories = ['All', 'Series', 'Education', 'Branded Content', 'Broadcast', 'Commercial', 'Live Events', 'AI Video']
+const categories = ['All', 'Series', 'Education', 'Branded Content', 'Broadcast', 'Live Events', 'AI Video']
 
 
 /* ─── Navbar ─── */
