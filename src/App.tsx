@@ -27,14 +27,6 @@ const productions: Production[] = [
     gifUrl: '/gifs/curiosity theory.gif?v=2',
   },
   {
-    id: 'day-on-mars',
-    title: 'Day On Mars',
-    partner: 'Fascinate Media',
-    description: 'Day On Mars is a 3D-Animated short-form series produced in Unreal Engine that showcases how future residents might spend their day on Mars.',
-    category: 'Series',
-    gifUrl: '/gifs/DayOnMars4k_7_6_24_1(2).gif',
-  },
-  {
     id: 'chevy-ev',
     title: "What's Cool About Electric",
     partner: 'Chevrolet',
@@ -63,10 +55,19 @@ const productions: Production[] = [
   {
     id: 'intuit-ideas',
     title: 'Intuit IDEAS',
-    partner: 'Fascinate Media',
+    partner: 'Intuit',
     description: 'A branded content series capturing the progress of business owners as they use Intuit\'s financial technology products such as TurboTax, Mailchimp, and more.',
     category: 'Branded Content',
     gifUrl: '/gifs/Intuit Teaser.gif',
+  },
+  {
+    id: 'attn-mgm',
+    title: 'Your Brain on Vegas',
+    partner: 'ATTN',
+    description: 'Justin partners with ATTN and travels across MGM resorts in Las Vegas, discussing how each experience heightens and reduces specific neurotransmitters.',
+    category: 'Branded Content',
+    videoUrl: 'https://player.vimeo.com/video/787494350',
+    gifUrl: '/gifs/mgm-attn.gif',
   },
   {
     id: 'second-home',
@@ -78,6 +79,14 @@ const productions: Production[] = [
     gifUrl: '/gifs/ASecondHome2.gif',
   },
   {
+    id: 'day-on-mars',
+    title: 'Day On Mars',
+    partner: 'Fascinate Media',
+    description: 'Day On Mars is a 3D-Animated short-form series produced in Unreal Engine that showcases how future residents might spend their day on Mars.',
+    category: 'Series',
+    gifUrl: '/gifs/DayOnMars4k_7_6_24_1(2).gif',
+  },
+  {
     id: 'metaverse',
     title: 'On The Verge',
     partner: 'Al Roker Entertainment',
@@ -85,15 +94,6 @@ const productions: Production[] = [
     category: 'Series',
     videoUrl: 'https://player.vimeo.com/video/787497906',
     gifUrl: '/gifs/metaverse.gif',
-  },
-  {
-    id: 'attn-mgm',
-    title: 'ATTN x MGM',
-    partner: 'ATTN',
-    description: 'Justin partners with ATTN and travels across MGM resorts in Las Vegas, discussing how each experience heightens and reduces specific neurotransmitters.',
-    category: 'Branded Content',
-    videoUrl: 'https://player.vimeo.com/video/787494350',
-    gifUrl: '/gifs/mgm-attn.gif',
   },
   {
     id: 'wedu-pbs',
@@ -315,6 +315,8 @@ function Navbar() {
               <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)}
                 className="text-sm text-gray-300 hover:text-white uppercase tracking-wider">{l}</a>
             ))}
+            <a href="https://www.justinshaifer.com" target="_blank" rel="noopener noreferrer"
+              className="text-sm text-gray-300 hover:text-white uppercase tracking-wider">Main Site</a>
           </div>
         )}
       </div>
@@ -517,30 +519,30 @@ function ContactModal({ onClose }: { onClose: () => void }) {
           BOOK <span className="text-gradient">NOW</span>
         </h2>
         <p className="text-gray-400 text-sm text-center mb-8">Fill out the form below and we'll get back to you shortly.</p>
-        <form className="space-y-5" onSubmit={e => e.preventDefault()}>
+        <form className="space-y-5" action="https://formspree.io/f/xlgpwjbj" method="POST">
           <div>
             <label className="block text-sm font-semibold text-white mb-1.5">Name <span className="text-red-400">*</span></label>
-            <input type="text" placeholder="Your name" required
+            <input type="text" name="name" placeholder="Your name" required
               className="w-full rounded-lg border border-white/10 bg-dark px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-blue transition" />
           </div>
           <div>
             <label className="block text-sm font-semibold text-white mb-1.5">Email <span className="text-red-400">*</span></label>
-            <input type="email" placeholder="your@email.com" required
+            <input type="email" name="email" placeholder="your@email.com" required
               className="w-full rounded-lg border border-white/10 bg-dark px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-blue transition" />
           </div>
           <div>
             <label className="block text-sm font-semibold text-white mb-1.5">Phone</label>
-            <input type="tel" placeholder="(optional)"
+            <input type="tel" name="phone" placeholder="(optional)"
               className="w-full rounded-lg border border-white/10 bg-dark px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-blue transition" />
           </div>
           <div>
             <label className="block text-sm font-semibold text-white mb-1.5">Subject <span className="text-red-400">*</span></label>
-            <input type="text" placeholder="What is this regarding?" required
+            <input type="text" name="subject" placeholder="What is this regarding?" required
               className="w-full rounded-lg border border-white/10 bg-dark px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-blue transition" />
           </div>
           <div>
             <label className="block text-sm font-semibold text-white mb-1.5">Message <span className="text-red-400">*</span></label>
-            <textarea placeholder="Tell us about your event..." required rows={5}
+            <textarea name="message" placeholder="Tell us about your event..." required rows={5}
               className="w-full rounded-lg border border-white/10 bg-dark px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-blue transition resize-none" />
           </div>
           <div>
@@ -548,7 +550,7 @@ function ContactModal({ onClose }: { onClose: () => void }) {
             <div className="space-y-2">
               {findSources.map(s => (
                 <label key={s} className="flex items-center gap-3 cursor-pointer">
-                  <input type="checkbox"
+                  <input type="checkbox" name="found_via" value={s}
                     className="w-4 h-4 rounded border-white/10 bg-dark text-blue accent-blue" />
                   <span className="text-sm text-gray-300">{s}</span>
                 </label>
