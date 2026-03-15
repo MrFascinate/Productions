@@ -607,13 +607,11 @@ function Footer() {
           <p className="text-sm text-gray-400">Award-winning STEM media producer and on-camera talent.</p>
         </div>
         <div>
-          <p className="text-xs text-gray-500 uppercase tracking-wider mb-3 font-semibold">Quick Links</p>
           {['Productions', 'Contact'].map(l => (
             <a key={l} href={`#${l.toLowerCase()}`} className="block text-sm text-gray-400 hover:text-white transition mb-2">{l}</a>
           ))}
         </div>
         <div>
-          <p className="text-xs text-gray-500 uppercase tracking-wider mb-3 font-semibold">Connect</p>
           {[
             { label: 'Main Website', href: 'https://www.justinshaifer.com' },
             { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jshaifer/' },
