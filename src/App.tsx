@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { Play, X, ChevronDown, ChevronLeft, ChevronRight, Mail, ExternalLink, Award, Tv, Users, Clapperboard, Menu } from 'lucide-react'
+import { Play, X, ChevronDown, ChevronLeft, ChevronRight, Mail, ExternalLink, Menu } from 'lucide-react'
 
 /* ─── Data ─── */
 
@@ -213,7 +213,7 @@ function Navbar() {
             <img src="/mr_fascinate_logo_transparent_blue.png" alt="Mr. Fascinate" className="h-7 object-contain" />
           </a>
           <div className="hidden md:flex items-center gap-8">
-            {['Productions', 'About', 'Contact'].map(l => (
+            {['Productions', 'Contact'].map(l => (
               <a key={l} href={`#${l.toLowerCase()}`} className="text-sm font-medium text-gray-300 hover:text-white transition uppercase tracking-wider">{l}</a>
             ))}
             <a href="https://www.justinshaifer.com" target="_blank" rel="noopener noreferrer"
@@ -227,7 +227,7 @@ function Navbar() {
         </div>
         {open && (
           <div className="md:hidden glass rounded-2xl mt-2 p-5 flex flex-col gap-3">
-            {['Productions', 'About', 'Contact'].map(l => (
+            {['Productions', 'Contact'].map(l => (
               <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)}
                 className="text-sm text-gray-300 hover:text-white uppercase tracking-wider">{l}</a>
             ))}
@@ -459,59 +459,6 @@ function Productions() {
   )
 }
 
-/* ─── About ─── */
-
-const highlights = [
-  { icon: Award, label: 'Forbes 30 Under 30', detail: 'Science & Technology' },
-  { icon: Tv, label: 'LinkedIn Top Voice', detail: 'Featured Instructor' },
-  { icon: Users, label: '5M+ Reached', detail: 'Global Audience' },
-  { icon: Clapperboard, label: 'Executive Producer', detail: 'Fascinate Media' },
-]
-const collabs = ['LinkedIn', 'Google', 'NVIDIA', 'Intuit', 'PBS', 'Discovery', 'Bill Nye', 'Al Roker']
-
-function About() {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-  return (
-    <section id="about" className="py-24 bg-dark-card">
-      <div className="section-divider" />
-      <div ref={ref} className="max-w-7xl mx-auto px-4 pt-16">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} className="grid grid-cols-2 gap-4">
-            {highlights.map((h, i) => (
-              <motion.div key={h.label} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.15 + i * 0.1 }} className="card p-5 text-center">
-                <div className="w-12 h-12 rounded-full bg-blue/10 flex items-center justify-center mx-auto mb-3">
-                  <h.icon size={22} className="text-cyan" />
-                </div>
-                <h4 className="text-sm font-bold text-white mb-1" style={{ fontFamily: 'Oswald' }}>{h.label}</h4>
-                <p className="text-xs text-gray-400">{h.detail}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.2 }}>
-            <span className="inline-block glass rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-cyan mb-4">About</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6" style={{ fontFamily: 'Oswald' }}>THE <span className="text-gradient">PRODUCER</span></h2>
-            <p className="text-gray-300 text-sm leading-relaxed mb-4">
-              At <span className="text-white font-semibold">Fascinate Media</span>, Justin serves as both executive producer and on-camera talent, creating educational content about innovation, AI & STEM literacy, and the Future of Work.
-            </p>
-            <p className="text-gray-300 text-sm leading-relaxed mb-6">
-              His team continues ongoing research and development by producing experimental media projects using AI tools, such as AI Agents, Unreal Engine, and Virtual Reality.
-            </p>
-            <p className="text-xs text-gray-500 uppercase tracking-wider mb-3">Past Collaborators</p>
-            <div className="flex flex-wrap gap-2 mb-8">
-              {collabs.map(c => <span key={c} className="glass rounded-full px-3 py-1.5 text-xs text-gray-300">{c}</span>)}
-            </div>
-            <a href="https://www.justinshaifer.com/bio" target="_blank" rel="noopener noreferrer"
-              className="inline-block border border-blue/40 rounded-full px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-blue/10 transition">Full Bio</a>
-          </motion.div>
-        </div>
-      </div>
-      <div className="section-divider mt-16" />
-    </section>
-  )
-}
-
 /* ─── Contact ─── */
 
 function Contact() {
@@ -558,7 +505,7 @@ function Footer() {
         </div>
         <div>
           <p className="text-xs text-gray-500 uppercase tracking-wider mb-3 font-semibold">Quick Links</p>
-          {['Productions', 'About', 'Contact'].map(l => (
+          {['Productions', 'Contact'].map(l => (
             <a key={l} href={`#${l.toLowerCase()}`} className="block text-sm text-gray-400 hover:text-white transition mb-2">{l}</a>
           ))}
         </div>
@@ -590,7 +537,6 @@ export default function App() {
       <Navbar />
       <Hero />
       <Productions />
-      <About />
       <Contact />
       <Footer />
     </div>
