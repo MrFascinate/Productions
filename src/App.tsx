@@ -24,7 +24,7 @@ const productions: Production[] = [
     description: 'An educational science podcast where co-hosts Dr. Dakotah Tyler and Justin Shaifer talk space, science, the future, and culture.',
     category: 'Series',
     externalUrl: 'https://curiositytheorypod.com',
-    gifUrl: '/gifs/curiosity theory.gif',
+    gifUrl: '/gifs/curiosity theory.gif?v=2',
   },
   {
     id: 'day-on-mars',
@@ -97,7 +97,7 @@ const productions: Production[] = [
   },
   {
     id: 'wedu-pbs',
-    title: 'WEDU PBS',
+    title: 'Climate Impact Reduction',
     partner: 'WEDU PBS',
     description: 'Justin works with WEDU PBS in Tampa, FL to discuss innovations for local climate impact reduction. This was filmed immediately before Hurricane Ian made landfall nearby.',
     category: 'Broadcast',
