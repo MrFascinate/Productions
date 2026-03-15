@@ -579,7 +579,7 @@ function Contact() {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4" style={{ fontFamily: 'Oswald' }}>
             INTERESTED IN <span className="text-gradient">COLLABORATING?</span>
           </h2>
-          <p className="text-gray-400 mb-10 max-w-lg mx-auto">Whether it's a branded production, educational series, or a speaking engagement — let's create something extraordinary together.</p>
+          <p className="text-gray-400 mb-10 max-w-lg mx-auto">Whether it's a branded production, educational series, or a speaking engagement: Our best project is our <em>next</em> project.</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 }}>
           <button onClick={() => setShowForm(true)}
