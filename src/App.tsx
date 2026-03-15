@@ -131,6 +131,15 @@ const productions: Production[] = [
     gifUrl: '/gifs/USA Science Fest.gif',
   },
   {
+    id: 'stem-success-summit',
+    title: 'STEM Success Summit',
+    partner: 'STEMedia',
+    description: 'Justin co-produced an educational summit with STEMedia for thousands of STEM professionals featuring popular STEM leaders and figures across the globe.',
+    category: 'Live Events',
+    externalUrl: 'https://www.stemedia.com/experience/stem-success-summit',
+    gifUrl: '/gifs/stem success trailer.gif',
+  },
+  {
     id: 'soul-of-a-nation',
     title: 'Soul of a Nation',
     partner: 'ABC News',
