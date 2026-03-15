@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { Play, X, ChevronDown, Mail, ExternalLink, Menu } from 'lucide-react'
+import { Play, X, ChevronDown, ExternalLink, Menu } from 'lucide-react'
 
 /* ─── Data ─── */
 
@@ -424,8 +424,6 @@ function ProductionCard({ p, i, onPlay }: { p: Production; i: number; onPlay: (p
 function Productions() {
   const [cat, setCat] = useState('All')
   const [video, setVideo] = useState<Production | null>(null)
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
 
   const filtered = cat === 'All' ? productions : productions.filter(p => p.category === cat)
 
@@ -433,13 +431,6 @@ function Productions() {
     <section id="productions" className="relative py-24 bg-dark">
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue/5 rounded-full blur-3xl" />
       <div className="max-w-7xl mx-auto px-4 relative">
-        <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Oswald' }}>
-            FEATURED <span className="text-gradient">WORK</span>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">From virtual production workflows and immersive educational series to AI explainers, STEM content, and branded campaigns.</p>
-        </motion.div>
-
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {categories.map(c => (
             <button key={c} onClick={() => setCat(c)}
@@ -469,9 +460,75 @@ function Productions() {
   )
 }
 
+/* ─── Contact Modal ─── */
+
+const findSources = ['LinkedIn', 'Instagram', 'YouTube', 'TikTok', 'Google', 'Referral', 'Other']
+
+function ContactModal({ onClose }: { onClose: () => void }) {
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] bg-black/90 backdrop-blur flex items-center justify-center p-4"
+      onClick={onClose}>
+      <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+        className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl border border-blue/30 bg-dark-card p-8"
+        onClick={e => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white transition"><X size={24} /></button>
+        <h2 className="text-3xl font-bold text-white text-center mb-2" style={{ fontFamily: 'Oswald' }}>
+          BOOK <span className="text-gradient">NOW</span>
+        </h2>
+        <p className="text-gray-400 text-sm text-center mb-8">Fill out the form below and we'll get back to you shortly.</p>
+        <form className="space-y-5" onSubmit={e => e.preventDefault()}>
+          <div>
+            <label className="block text-sm font-semibold text-white mb-1.5">Name <span className="text-red-400">*</span></label>
+            <input type="text" placeholder="Your name" required
+              className="w-full rounded-lg border border-white/10 bg-dark px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-blue transition" />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-white mb-1.5">Email <span className="text-red-400">*</span></label>
+            <input type="email" placeholder="your@email.com" required
+              className="w-full rounded-lg border border-white/10 bg-dark px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-blue transition" />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-white mb-1.5">Phone</label>
+            <input type="tel" placeholder="(optional)"
+              className="w-full rounded-lg border border-white/10 bg-dark px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-blue transition" />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-white mb-1.5">Subject <span className="text-red-400">*</span></label>
+            <input type="text" placeholder="What is this regarding?" required
+              className="w-full rounded-lg border border-white/10 bg-dark px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-blue transition" />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-white mb-1.5">Message <span className="text-red-400">*</span></label>
+            <textarea placeholder="Tell us about your event..." required rows={5}
+              className="w-full rounded-lg border border-white/10 bg-dark px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-blue transition resize-none" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-white mb-1.5">How did you find me? <span className="text-gray-500 font-normal">(optional)</span></p>
+            <div className="space-y-2">
+              {findSources.map(s => (
+                <label key={s} className="flex items-center gap-3 cursor-pointer">
+                  <input type="checkbox"
+                    className="w-4 h-4 rounded border-white/10 bg-dark text-blue accent-blue" />
+                  <span className="text-sm text-gray-300">{s}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+          <button type="submit"
+            className="w-full bg-blue text-white font-semibold text-sm uppercase tracking-wider rounded-full px-8 py-4 hover:-translate-y-0.5 transition shadow-lg shadow-blue/30 mt-2">
+            Submit
+          </button>
+        </form>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 /* ─── Contact ─── */
 
 function Contact() {
+  const [showForm, setShowForm] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   return (
@@ -484,20 +541,16 @@ function Contact() {
           </h2>
           <p className="text-gray-400 mb-10 max-w-lg mx-auto">Whether it's a branded production, educational series, or a speaking engagement — let's create something extraordinary together.</p>
         </motion.div>
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 }}
-          className="card p-8 sm:p-12">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="mailto:contact@justinshaifer.com"
-              className="inline-flex items-center gap-2 bg-blue text-white font-semibold text-sm uppercase tracking-wider rounded-full px-8 py-4 hover:-translate-y-0.5 transition shadow-lg shadow-blue/30 w-full sm:w-auto justify-center">
-              <Mail size={16} /> Send Email
-            </a>
-            <a href="https://www.justinshaifer.com/contact" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-blue/40 text-white font-semibold text-sm uppercase tracking-wider rounded-full px-8 py-4 hover:bg-blue/10 transition w-full sm:w-auto justify-center">
-              <ExternalLink size={16} /> Contact Page
-            </a>
-          </div>
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 }}>
+          <button onClick={() => setShowForm(true)}
+            className="inline-flex items-center gap-2 bg-blue text-white font-semibold text-sm uppercase tracking-wider rounded-full px-8 py-4 hover:-translate-y-0.5 transition shadow-lg shadow-blue/30">
+            Contact
+          </button>
         </motion.div>
       </div>
+      <AnimatePresence>
+        {showForm && <ContactModal onClose={() => setShowForm(false)} />}
+      </AnimatePresence>
     </section>
   )
 }
