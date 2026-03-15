@@ -402,9 +402,8 @@ function Productions() {
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue/5 rounded-full blur-3xl" />
       <div className="max-w-7xl mx-auto px-4 relative">
         <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} className="text-center mb-12">
-          <span className="inline-block glass rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-cyan mb-4">Featured Work</span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Oswald' }}>
-            THE <span className="text-gradient">PRODUCTIONS</span>
+            FEATURED <span className="text-gradient">WORK</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">From virtual production workflows and immersive educational series to AI explainers, STEM content, and branded campaigns.</p>
         </motion.div>
