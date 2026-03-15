@@ -11,6 +11,7 @@ interface Production {
   description: string
   category: string
   videoUrl?: string
+  externalUrl?: string
   gifUrl?: string
   thumbnailUrl?: string
 }
@@ -143,6 +144,15 @@ const productions: Production[] = [
     description: 'An animated series that explains educational concepts like environmental justice and food deserts.',
     category: 'Series',
     gifUrl: '/gifs/HOOD SCIENCE.gif',
+  },
+  {
+    id: 'curiosity-theory',
+    title: 'Curiosity Theory',
+    partner: 'Fascinate Media',
+    description: 'An educational science podcast where co-hosts Dr. Dakotah Tyler and Justin Shaifer talk space, science, the future, and culture.',
+    category: 'Series',
+    externalUrl: 'https://curiositytheorypod.com',
+    gifUrl: '/gifs/curiosity theory.gif',
   },
   {
     id: 'ai-cool-things',
@@ -383,7 +393,10 @@ function ProductionCard({ p, i, onPlay }: { p: Production; i: number; onPlay: (p
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: i * 0.08 }}
       className="card cursor-pointer group"
-      onClick={() => p.videoUrl && onPlay(p)}>
+      onClick={() => {
+        if (p.externalUrl) window.open(p.externalUrl, '_blank', 'noopener,noreferrer')
+        else if (p.videoUrl) onPlay(p)
+      }}>
 
       {/* Thumbnail */}
       <div className="relative aspect-video overflow-hidden bg-dark">
