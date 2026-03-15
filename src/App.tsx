@@ -261,8 +261,7 @@ function Hero() {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
             className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
-            Award-winning media exploring AI, space, neuroscience, and the future
-            — produced and hosted by Justin <span className="font-semibold text-white mx-1">Mr. Fascinate</span> Shaifer.
+            Award winning educational content about Space, Biology, AI and the future, hosted and executive produced by Justin <span className="font-semibold text-white mx-1">"Mr. Fascinate"</span> Shaifer.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}
             className="flex flex-col sm:flex-row gap-4 justify-center">
